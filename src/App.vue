@@ -1,13 +1,22 @@
 <template>
   <div id="app">
-    <Button type="primary">primary</Button>
+    <live-header v-if="!$route.meta.noHeader"></live-header>
+    <keep-alive>
+      <!--使用keep-alive会将页面缓存-->
+      <router-view v-if="$route.meta.keepAlive"></router-view>
+    </keep-alive> 
+    <router-view v-if="!$route.meta.keepAlive"></router-view>
   </div>
 </template>
 
 <script>
+import liveHeader from "@/components/liveHeader"
 
 export default {
   name: 'App',
+  components: {
+    liveHeader
+  }
 }
 </script>
 
